@@ -22,7 +22,6 @@ local BypassTab = Window:CreateTab("Bypass", "shield")
 local AutoWalkTab = Window:CreateTab("Auto Walk", "bot")
 local VisualTab = Window:CreateTab("Visual", "layers")
 local RunAnimationTab = Window:CreateTab("Run Animation", "person-standing")
-local UpdateTab = Window:CreateTab("Update Script", "file")
 local CreditsTab = Window:CreateTab("Credits", "scroll-text")
 
 -------------------------------------------------------------
@@ -2348,118 +2347,6 @@ end
 
 
 -------------------------------------------------------------
--- UPDATE SCRIPT
--------------------------------------------------------------
------| UPDATE SCRIPT VARIABLES |-----
--- Variables to control the update process
-local updateEnabled = false
-local stopUpdate = {false}
-
--------------------------------------------------------------
-
------| MENU 1 > UPDATE SCRIPT STATUS |-----
--- Label to display the status of checking JSON files
-local Section = UpdateTab:CreateSection("Update Script Menu")
-
-local Label = UpdateTab:CreateLabel("Pengecekan file...")
-
--- Task for checking JSON files during startup
-task.spawn(function()
-    for i, f in ipairs(jsonFiles) do
-        local ok = EnsureJsonFile(f)
-        Label:Set((ok and "✔ Proses Cek File: " or "❌ Gagal: ").." ("..i.."/"..#jsonFiles..")")
-        task.wait(0.5)
-    end
-    Label:Set("✔ Semua file aman")
-end)
-
--------------------------------------------------------------
-
------| MENU 2 > UPDATE SCRIPT TOGGLE |-----
--- Toggle to start the script update process (redownload all JSON)
-UpdateTab:CreateToggle({
-    Name = "Mulai Update Script",
-    CurrentValue = false,
-    Callback = function(state)
-        if state then
-            updateEnabled = true
-            stopUpdate[1] = false
-            task.spawn(function()
-                Label:Set("🔄 Proses update file...")
-                
-                -- Delete all existing JSON files
-                for _, f in ipairs(jsonFiles) do
-                    local savePath = jsonFolder .. "/" .. f
-                    if isfile(savePath) then
-                        delfile(savePath)
-                    end
-                end
-                
-                -- Re-download all JSON files
-                for i, f in ipairs(jsonFiles) do
-                    if stopUpdate[1] then break end
-                    
-                    Rayfield:Notify({
-                        Title = "Update Script",
-                        Content = "Proses Update " .. " ("..i.."/"..#jsonFiles..")",
-                        Duration = 2,
-                        Image = "file",
-                    })
-                    
-                    local ok, res = pcall(function() return game:HttpGet(baseURL..f) end)
-                    if ok and res and #res > 0 then
-                        writefile(jsonFolder.."/"..f, res)
-                        Label:Set("📥 Proses Update: ".. " ("..i.."/"..#jsonFiles..")")
-                    else
-                        Rayfield:Notify({
-                            Title = "Update Script",
-                            Content = "❌ Update script gagal",
-                            Duration = 3,
-                            Image = "file",
-                        })
-                        Label:Set("❌ Gagal: ".. " ("..i.."/"..#jsonFiles..")")
-                    end
-                    task.wait(0.3)
-                end
-                
-                -- Update result notification
-                if not stopUpdate[1] then
-                    Rayfield:Notify({
-                        Title = "Update Script",
-                        Content = "Telah berhasil!",
-                        Duration = 5,
-                        Image = "check-check",
-                    })
-                else
-                    Rayfield:Notify({
-                        Title = "Update Script",
-                        Content = "❌ Update canceled",
-                        Duration = 3,
-                        Image = 4483362458,
-                    })
-                end
-				
-                -- Re-check all files after updating
-                for i, f in ipairs(jsonFiles) do
-                    local ok = EnsureJsonFile(f)
-                    Label:Set((ok and "✔ Cek File: " or "❌ Failed: ").." ("..i.."/"..#jsonFiles..")")
-                    task.wait(0.3)
-                end
-                Label:Set("✔ Semua file aman")
-            end)
-        else
-            updateEnabled = false
-            stopUpdate[1] = true
-        end
-    end,
-})
--------------------------------------------------------------
--- UPDATE SCRIPT - END
--------------------------------------------------------------
-
-
-
--------------------------------------------------------------
 -- CREDITS
 -------------------------------------------------------------
 local Section = CreditsTab:CreateSection("Credits List")
@@ -2472,4 +2359,5 @@ CreditsTab:CreateLabel("Dev: Saya sendiri")
 -- CREDITS - END
 
 -------------------------------------------------------------
+
 
