@@ -148,22 +148,6 @@ ScriptTab:CreateButton({
 })
 
 ScriptTab:CreateButton({
-    Name = " YAHAYUK AVA PNDK ( TES CB )",
-    Callback = function()
-        Rayfield:Notify({Title="OTW", Image="file", Content="Loading Script...", Duration=4})
-        loadstring(game:HttpGet("https://raw.githubusercontent.com/valderasea/rosblog/refs/heads/main/YHYK-P/main.lua"))()
-    end
-})
-
-ScriptTab:CreateButton({
-    Name = " YAHAYUK AVA TINGGI ( TES CB )",
-    Callback = function()
-        Rayfield:Notify({Title="OTW", Image="file", Content="Loading Script...", Duration=4})
-        loadstring(game:HttpGet("https://raw.githubusercontent.com/valderasea/rosblog/refs/heads/main/YHYK-T/main.lua"))()
-    end
-})
-
-ScriptTab:CreateButton({
     Name = " FIST-IT ( TES CB )",
     Callback = function()
         Rayfield:Notify({Title="OTW", Image="file", Content="Loading Script...", Duration=4})
