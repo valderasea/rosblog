@@ -147,6 +147,31 @@ ScriptTab:CreateButton({
     end
 })
 
+ScriptTab:CreateButton({
+    Name = " YAHAYUK AVA PNDK ( TES CB )",
+    Callback = function()
+        Rayfield:Notify({Title="OTW", Image="file", Content="Loading Script...", Duration=4})
+        loadstring(game:HttpGet("https://raw.githubusercontent.com/valderasea/rosblog/refs/heads/main/YHYK-P/main.lua"))()
+    end
+})
+
+ScriptTab:CreateButton({
+    Name = " YAHAYUK AVA TINGGI ( TES CB )",
+    Callback = function()
+        Rayfield:Notify({Title="OTW", Image="file", Content="Loading Script...", Duration=4})
+        loadstring(game:HttpGet("https://raw.githubusercontent.com/valderasea/rosblog/refs/heads/main/YHYK-T/main.lua"))()
+    end
+})
+
+ScriptTab:CreateButton({
+    Name = " FIST-IT ( TES CB )",
+    Callback = function()
+        Rayfield:Notify({Title="OTW", Image="file", Content="Loading Script...", Duration=4})
+        loadstring(game:HttpGet("https://raw.githubusercontent.com/valderasea/rosblog/refs/heads/main/FIST-IT/main.lua"))()
+    end
+})
+
+
 local ScriptTab = Window:CreateTab("Script lain", 4483362458)
 ScriptTab:CreateSection("⭕ Punya orang gtw work kg")
 
@@ -167,14 +192,12 @@ ScriptTab:CreateButton({
 })
 
 ScriptTab:CreateButton({
-    Name = " VIOLENCE DISTRICT ( YG ORG )",
+    Name = " VIOLENCE DISTRICT",
     Callback = function()
         Rayfield:Notify({Title="OTW", Image="file", Content="Loading VD...", Duration=4})
         loadstring(game:HttpGet("https://raw.githubusercontent.com/valderasea/rosblog/refs/heads/main/VDISTRCT/main.lua"))()
     end
 })
-
-
 
 ScriptTab:CreateButton({
     Name = " PRIVATE SERVER",
