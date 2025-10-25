@@ -1679,7 +1679,7 @@ function RayfieldLibrary:CreateWindow(Settings)
 			while true do
 				task.wait(math.random(180, 600))
 				RayfieldLibrary:Notify({
-					Title = "Infirmation",
+					Title = "Information",
 					Content = "Mau req gunung? Cet atmin aja ygy",
 					Duration = 7,
 					Image = 4370033185,
@@ -3996,3 +3996,4 @@ task.delay(4, function()
 end)
 
 return RayfieldLibrary
+
