@@ -993,6 +993,29 @@ local function SaveConfiguration()
 		local ScreenGui = Instance.new("ScreenGui")
 		ScreenGui.Parent = script.Parent
 		ScreenGui.Name = 'configuration'
+		local TweenService = game:GetService("TweenService")
+
+local function animateBackground(gui)
+	local hue = 0
+	while task.wait(0.03) do
+		hue = (hue + 0.003) % 1
+		local color = Color3.fromHSV(hue, 0.7, 0.8)
+		gui.BackgroundColor3 = color
+	end
+end
+
+ScreenGui.IgnoreGuiInset = true
+ScreenGui.ResetOnSpawn = false
+
+local BG = Instance.new("Frame")
+BG.Parent = ScreenGui
+BG.Size = UDim2.new(1, 0, 1, 0)
+BG.BackgroundColor3 = Color3.fromRGB(100, 0, 255)
+BG.ZIndex = 0
+
+task.spawn(function()
+	animateBackground(BG)
+end)
 
 		local TextBox = Instance.new("TextBox")
 		TextBox.Parent = ScreenGui
@@ -3996,4 +4019,5 @@ task.delay(4, function()
 end)
 
 return RayfieldLibrary
+
 
