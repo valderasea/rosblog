@@ -9,7 +9,7 @@ local Window = Rayfield:CreateWindow({
 
 
 local ScriptTab = Window:CreateTab("List Scripts", 4483362458)
-ScriptTab:CreateSection("⭕ JELEK WAJAR GRATIS🗿")
+ScriptTab:CreateSection("⭕ ADA YG BLOM UPDATE, GD BAHAN RECORD")
 
 ScriptTab:CreateButton({
     Name = " MOUNT FUNNY",
